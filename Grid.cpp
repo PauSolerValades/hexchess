@@ -1,10 +1,11 @@
 #include <vector>
 
+using namespace std;
 
 class Grid{
     private:
         int cells;
-        vector<vector<Cell>>
+        vector<vector<Cell*>>;
 
 
     public:
@@ -15,4 +16,4 @@ class Grid{
                 return false;
         }
 
-}
+};
