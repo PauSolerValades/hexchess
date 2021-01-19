@@ -1,6 +1,10 @@
+#include <vector>
+
+
 class Grid{
     private:
         int cells;
+        vector<vector<Cell>>
 
 
     public:
