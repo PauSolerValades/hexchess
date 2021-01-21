@@ -1,8 +1,13 @@
+#include <vector>
+
+using namespace std;
+
 class Grid{
     private:
-        int cells;
-        vector<vector<Cell*>>;
+        int num_cells;
+        vector<vector<Cell*>> cells;
 
     public:
-        isValidCell(int x, int y, int z)
-}
+        Grid(int num_cells_arg, vector<vector<Cell*>> cells_arg);
+
+};
