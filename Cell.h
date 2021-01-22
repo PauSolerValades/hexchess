@@ -1,3 +1,7 @@
+#include <string>
+
+using namespace std;
+
 class Cell{
     private:
         int x;
@@ -5,4 +9,6 @@ class Cell{
     
     public:
         char piece;
+        Cell(int x, int y);
+        string toString();
 };
