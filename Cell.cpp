@@ -1,21 +1,16 @@
 #include <string>
+#include "Cell.h"
 
 using namespace std;
 
-class Cell{
-    private:
-        int x;
-        int y;
+Cell::Cell() = default;
 
-    public:
-        char piece;
-        Cell(int x, int y, char piece){
-            x=x;
-            y=y;
-            piece=piece;
-        }
+Cell::Cell(int xp, int yp, char piecep){
+    x=xp;
+    y=yp;
+    piece=piecep;
+}
 
-        string toString(){
-            return "(" + to_string(x) + "," + to_string(y) +")";
-        }
-};
+string Cell::toString(){
+    return "(" + to_string(x) + "," + to_string(y) +")";
+}

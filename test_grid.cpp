@@ -1,8 +1,9 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 #include "Cell.h"
-#include "Grid.h"
+//#include "Grid.h"
 
 using namespace std;
 
@@ -20,75 +21,78 @@ int main()
     Grid.close();
     */
 
-    int i, j;
-
-    vector<vector<Cell*>> grid;
-
-    for(j=6; j<=11; j++)
+    int i, j, f;
+    vector<vector<Cell>> grid;
+    
+    f = 0;
+    for(j=6; j<=11; ++j)
     {
-        vector<Cell*> *myVector = new vector<Cell*>(j);
-        
-        for(i=0; i<j; i++)
+        vector<Cell> row;
+
+        if(j%2==0)
         {
-            Cell *c;
+            for(i=0; i<j; ++i)
+            {   
+                cout << i << endl;
+                Cell c(f, 2*i, '_');
 
-            if(j%2==0){
-                c = new Cell(j,2*i);
+                row.push_back(c);
             }
-            else
-            {
-                c = new Cell(j,2*i+1);
-            }
-
-            (*myVector)[i] = c;
         }
+        else
+        {
+            for(i=0; i<j; ++i)
+            {
+                Cell c(f, 2*i+1, '_');
 
-        grid.push_back((*myVector));
+                row.push_back(c);
+            }
+        }
+        
+
+        grid.push_back(row);
+        ++f;
     }
 
-    for(j=11; j>=6; j--)
+    for(j=11; j>=6; --j)
     {
-        vector<Cell*> *myVector = new vector<Cell*>(j);
-        
-        for(i=0; i<j; i++)
+        vector<Cell> row;
+
+        if(j%2==0)
         {
-            Cell *c;
+            for(i=0; i<j; ++i)
+            {   
+                cout << i << endl;
+                Cell c(f, 2*i, '_');
 
-            if(j%2==0){
-                c = new Cell(j,2*i);
+                row.push_back(c);
             }
-            else
-            {
-                c = new Cell(j,2*i+1);
-            }
-            
-            (*myVector)[i] = c;
         }
+        else
+        {
+            for(i=0; i<j; ++i)
+            {
+                Cell c(f, 2*i+1, '_');
 
-        grid.push_back((*myVector));
+                row.push_back(c);
+            }
+        }
+        
+
+        grid.push_back(row);
+        ++f;
     }
 
     for(i=0; i<grid.size(); i++)
     {
-        cout << grid.size() << endl;
+        cout << grid[i].size() << endl;
         for(j=0; j<grid[i].size(); j++)
         {
-            cout << grid[i][j]->toString() << endl;
+            cout << grid[i][j].toString() << endl;
         }
 
         cout << endl;
     }
-    /*
-    for(i=0; i<grid.size(); i++)
-    {
-        cout << grid.size() << endl;
-        for(j=0; j<grid[i].size(); j++)
-        {
-            cout << grid[i][j] << endl;
-        }
-
-        cout << endl;
-    }
-    */
+    
     //Grid grid(91, );
 }

@@ -9,6 +9,7 @@ class Cell{
     
     public:
         char piece;
-        Cell(int x, int y);
+        Cell();
+        Cell(int x, int y, char piece);
         string toString();
 };
