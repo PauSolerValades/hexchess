@@ -3,13 +3,11 @@
 
 using namespace std;
 
-
 Cell::Cell() = default;
-Cell::Cell(int xp, int yp, char piecep){
-    x=xp;
-    y=yp;
-    piece=piecep;
+Cell::Cell(int x, int y){
+    this->x=x;
+    this->y=y;
 }
 string Cell::toString(){
-    return "(" + to_string(x) + "," + to_string(y) +") -> " + piece;
+    return "(" + to_string(x) + "," + to_string(y) +") -> ";
 }

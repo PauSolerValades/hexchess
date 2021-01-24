@@ -13,5 +13,5 @@ class Grid{
         Grid();
         Grid(int num_cells_arg, vector<vector<Cell>> cells_arg);
         string toString();
-
+        Cell* acces_cell(int x, int y);
 };

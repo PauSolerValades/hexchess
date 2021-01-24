@@ -1,7 +1,7 @@
 #include <string>
 
-#ifndef NUM_H 
-#define NUM_H
+#ifndef CELL_H 
+#define CELL_H
 
 using namespace std;
 
@@ -11,9 +11,8 @@ class Cell{
         int y;
     
     public:
-        char piece;
         Cell();
-        Cell(int x, int y, char piece);
+        Cell(int x, int y);
         string toString();
 };
 #endif
