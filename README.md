@@ -1,2 +1,2 @@
 # hexchess
-Doing an hexagonal chess for funsies
+Doing a terminal hexagonal chess for funsies in C++
