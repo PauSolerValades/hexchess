@@ -9,13 +9,24 @@ string Piece::toString(){
     return a; 
 }
 
-Horse::Horse(char type){
+Knight::Knight() = default;
+Knight::Knight(char type){
     this->type = type;
 }
+vector<Cell*> Knight::possible_movements(Cell* cell){
 
-vector<Cell*> Horse::possible_movements(Cell* cell){
+    vector<Cell*> cells(1,0);
 
-    vector<Cell*> cells;
+    return cells;    
+}
+
+Bishop::Bishop() = default;
+Bishop::Bishop(char type){
+    this->type = type;
+}
+vector<Cell*> Bishop::possible_movements(Cell* cell){
+
+    vector<Cell*> cells(1,0);
 
     return cells;    
 }
