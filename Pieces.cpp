@@ -13,6 +13,33 @@ string Piece::toString(){
 char Piece::getType(){
     return this->type;
 }
+vector<Coord*> Piece::get_diagonals(Coord* coord){
+    
+    int i;
+    vector<Coord*> result, real_result;
+
+    Coord* c1 = new Coord(coord->x+2, coord->y-1, coord->z-1);
+    Coord* c2 = new Coord(coord->x-2, coord->y+1, coord->z+1);
+    Coord* c3 = new Coord(coord->x+1, coord->y-2, coord->z+1);
+    Coord* c4 = new Coord(coord->x-1, coord->y+2, coord->z-1);
+    Coord* c5 = new Coord(coord->x+1, coord->y+1, coord->z-2);
+    Coord* c6 = new Coord(coord->x-1, coord->y-1, coord->z+2);
+    
+    result.push_back(c1);
+    result.push_back(c2);
+    result.push_back(c3);
+    result.push_back(c4);
+    result.push_back(c5);
+    result.push_back(c6);
+
+    for(i=0; i<result.size(); ++i){
+        if(abs(result[i]->x)>=5 || abs(result[i]->y)>=5 || abs(result[i]->z)>=5){
+            real_result.push_back(result[i]);
+        }
+    }
+
+    return result;
+}
 
 Nopiece::Nopiece(){
     this->type = ' ';
@@ -47,34 +74,34 @@ vector<Coord*> Bishop::possible_movements(Coord* coord){
     //the map goes as far as +-10 in each coordinate,
 
     //first axis
-    for(i=coord->x, j=coord->y, k=coord->z; i<=10 && j<=10 && k<=10; i+=2, --j, --k){
+    for(i=coord->x+2, j=coord->y-1, k=coord->z-1; i<=5 && j<=5 && k<=5; i+=2, --j, --k){
         Coord* c1 = new Coord(i,j,k);
         results.push_back(c1);
     }
 
-    for(i=coord->x, j=coord->y, k=coord->z; abs(i)<=10 && abs(j)<=10 && abs(k)<=10; i-=2, ++j, ++k){
+    for(i=coord->x-2, j=coord->y+1, k=coord->z+1; abs(i)<=5 && abs(j)<=5 && abs(k)<=5; i-=2, ++j, ++k){
         Coord* c1 = new Coord(i,j,k);
         results.push_back(c1);
     }
 
     //second axis
-    for(i=coord->x, j=coord->y, k=coord->z; abs(i)<=10 && abs(j)<=10 && abs(k)<=10; ++i, j-=2, ++k){
+    for(i=coord->x+1, j=coord->y-2, k=coord->z+1; abs(i)<=5 && abs(j)<=5 && abs(k)<=5; ++i, j-=2, ++k){
         Coord* c1 = new Coord(i,j,k);
         results.push_back(c1);
     }
 
-    for(i=coord->x, j=coord->y, k=coord->z; abs(i)<=10 && abs(j)<=10 && abs(k)<=10; --i, j+=2, --k){
+    for(i=coord->x-1, j=coord->y+2, k=coord->z-1; abs(i)<=5 && abs(j)<=5 && abs(k)<=5; --i, j+=2, --k){
         Coord* c1 = new Coord(i,j,k);
         results.push_back(c1);
     }
 
     //third axis
-    for(i=coord->x, j=coord->y, k=coord->z; abs(i)<=10 && abs(j)<=10 && abs(k)<=10; --i, --j, k+=2){
+    for(i=coord->x-1, j=coord->y-1, k=coord->z+2; abs(i)<=5 && abs(j)<=5 && abs(k)<=5; --i, --j, k+=2){
         Coord* c1 = new Coord(i,j,k);
         results.push_back(c1);
     }
 
-    for(i=coord->x, j=coord->y, k=coord->z; abs(i)<=10 && abs(j)<=10 && abs(k)<=10; ++i, ++j, k-=2){
+    for(i=coord->x+1, j=coord->y+1, k=coord->z-2; abs(i)<=5 && abs(j)<=5 && abs(k)<=5; ++i, ++j, k-=2){
         Coord* c1 = new Coord(i,j,k);
         results.push_back(c1);
     }

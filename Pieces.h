@@ -9,6 +9,7 @@ class Piece{
     public:
         virtual ~Piece();
         virtual vector<Coord*> possible_movements(Coord* coord) = 0;
+        vector<Coord*> get_diagonals(Coord* coord);
         string toString();
         char getType();
 
@@ -38,5 +39,21 @@ class Bishop: public Piece{
         Bishop();
         Bishop(char type);
         vector<Coord*> possible_movements(Coord* Coord);
+};
+
+class PawnW: public Piece{
+    public:
+        PawnW();
+        PawnW(char type);
+        vector<Coord*> possible_movements(Coord* Coord);
+
+};
+
+class PawnB: public Piece{
+    public:
+        PawnB();
+        PawnB(char type);
+        vector<Coord*> possible_movements(Coord* Coord);
+
 };
 #endif

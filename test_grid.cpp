@@ -29,20 +29,27 @@ int main()
 
     Grid* grid;
     Cell* actual_cell;
-    vector<Coord*> results;
+    vector<Coord*> results, diagonals;
     grid = init_grid();
     actual_cell = grid->acces_cell(2,4);
 
     Bishop* bishopWhite = new Bishop('B');
-    Coord* coord = new Coord(0,0,0);
+    Coord* coord = new Coord(0,-5,5);
     
     results = bishopWhite->possible_movements(coord);
+    diagonals = bishopWhite->get_diagonals(coord);
     actual_cell->setPiece(bishopWhite);
     cout << grid->toString() << endl;
 
     for(i=0; i<results.size(); ++i){
         cout << results[i]->toString() << endl;
     }
+    cout << results.size() << endl;
+
+    for(i=0; i<diagonals.size(); ++i){
+        cout << diagonals[i]->toString() << endl;
+    }
+    cout << diagonals.size() << endl;
 
 }
 
