@@ -25,16 +25,24 @@ int main()
 
     Grid.close();
     */
+    int i,j,k;
 
     Grid* grid;
     Cell* actual_cell;
-
+    vector<Coord*> results;
     grid = init_grid();
     actual_cell = grid->acces_cell(2,4);
 
     Bishop* bishopWhite = new Bishop('B');
+    Coord* coord = new Coord(0,0,0);
+    
+    results = bishopWhite->possible_movements(coord);
     actual_cell->setPiece(bishopWhite);
     cout << grid->toString() << endl;
+
+    for(i=0; i<results.size(); ++i){
+        cout << results[i]->toString() << endl;
+    }
 
 }
 

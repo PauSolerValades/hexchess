@@ -1,4 +1,6 @@
 #include <vector>
+#include <iostream>
+
 #include "Pieces.h"
 #include "Coord.h"
 
@@ -38,42 +40,44 @@ Bishop::Bishop(char type){
 vector<Coord*> Bishop::possible_movements(Coord* coord){
 
     vector<Coord*> toCheck, protopossible, results;
-    int i;
+    int i, j, k;
     
-    toCheck.push_back(coord);
-
-    while(toCheck.size() != 0){
-        Coord c1(toCheck[0]->x+2, toCheck[0]->y-1, toCheck[0]->z-1);
-        Coord c2(toCheck[0]->x-2, toCheck[0]->y+1, toCheck[0]->z+1);
-        Coord c3(toCheck[0]->x-1, toCheck[0]->y+2, toCheck[0]->z-1);
-        Coord c4(toCheck[0]->x+1, toCheck[0]->y-2, toCheck[0]->z+1);
-        Coord c5(toCheck[0]->x-1, toCheck[0]->y-1, toCheck[0]->z+2);
-        Coord c6(toCheck[0]->x+1, toCheck[0]->y+1, toCheck[0]->z-2);
-        
-        toCheck.erase(toCheck.begin());
-
-        Coord* c1_ptr = &c1;
-        Coord* c2_ptr = &c2;
-        Coord* c3_ptr = &c3;
-        Coord* c4_ptr = &c4;
-        Coord* c5_ptr = &c5;
-        Coord* c6_ptr = &c6;
-
-        protopossible.push_back(c1_ptr);
-        protopossible.push_back(c2_ptr);
-        protopossible.push_back(c3_ptr);
-        protopossible.push_back(c4_ptr);
-        protopossible.push_back(c5_ptr);
-        protopossible.push_back(c6_ptr);
-
-        for(i=0; i<6; ++i){
-            if(abs(protopossible[i]->x) <= 6 && abs(protopossible[i]->y) <= 6 && abs(protopossible[i]->z) <= 6){
-                toCheck.push_back(protopossible[i]);
-            }
-        }
-    }
     //moving by diagonals: adding +-1 to two coord and +-2 to one
+    //for each cell we calculate the 3 possible diagonals.
+    //the map goes as far as +-10 in each coordinate,
 
+    //first axis
+    for(i=coord->x, j=coord->y, k=coord->z; i<=10 && j<=10 && k<=10; i+=2, --j, --k){
+        Coord* c1 = new Coord(i,j,k);
+        results.push_back(c1);
+    }
+
+    for(i=coord->x, j=coord->y, k=coord->z; abs(i)<=10 && abs(j)<=10 && abs(k)<=10; i-=2, ++j, ++k){
+        Coord* c1 = new Coord(i,j,k);
+        results.push_back(c1);
+    }
+
+    //second axis
+    for(i=coord->x, j=coord->y, k=coord->z; abs(i)<=10 && abs(j)<=10 && abs(k)<=10; ++i, j-=2, ++k){
+        Coord* c1 = new Coord(i,j,k);
+        results.push_back(c1);
+    }
+
+    for(i=coord->x, j=coord->y, k=coord->z; abs(i)<=10 && abs(j)<=10 && abs(k)<=10; --i, j+=2, --k){
+        Coord* c1 = new Coord(i,j,k);
+        results.push_back(c1);
+    }
+
+    //third axis
+    for(i=coord->x, j=coord->y, k=coord->z; abs(i)<=10 && abs(j)<=10 && abs(k)<=10; --i, --j, k+=2){
+        Coord* c1 = new Coord(i,j,k);
+        results.push_back(c1);
+    }
+
+    for(i=coord->x, j=coord->y, k=coord->z; abs(i)<=10 && abs(j)<=10 && abs(k)<=10; ++i, ++j, k-=2){
+        Coord* c1 = new Coord(i,j,k);
+        results.push_back(c1);
+    }
 
     return results;    
 }

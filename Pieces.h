@@ -37,8 +37,6 @@ class Bishop: public Piece{
     public:
         Bishop();
         Bishop(char type);
-        
-    private:
         vector<Coord*> possible_movements(Coord* Coord);
 };
 #endif
