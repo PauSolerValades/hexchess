@@ -1,17 +1,28 @@
 #include <vector>
 #include <string>
-#include "Cell.h"
+#include "Coord.h"
+
+#ifndef PIECE_H 
+#define PIECE_H
 
 class Piece{
     public:
         virtual ~Piece();
-        virtual vector<Cell*> possible_movements(Cell* cell) = 0;
+        virtual vector<Coord*> possible_movements(Coord* coord) = 0;
         string toString();
+        char getType();
 
     protected:
         char type;
 };
 
+class Nopiece: public Piece{
+    public:
+        Nopiece();
+
+    private:
+        vector<Coord*> possible_movements(Coord* Coord);
+};
 
 class Knight: public Piece{
     public:
@@ -19,8 +30,7 @@ class Knight: public Piece{
         Knight(char type);
         
     private:
-        vector<Cell*> possible_movements(Cell* cell);
-        string toString();
+        vector<Coord*> possible_movements(Coord* coord);
 };
 
 class Bishop: public Piece{
@@ -29,6 +39,6 @@ class Bishop: public Piece{
         Bishop(char type);
         
     private:
-        vector<Cell*> possible_movements(Cell* cell);
-        string toString();
+        vector<Coord*> possible_movements(Coord* Coord);
 };
+#endif

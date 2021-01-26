@@ -30,11 +30,10 @@ int main()
     Cell* actual_cell;
 
     grid = init_grid();
-
     actual_cell = grid->acces_cell(2,4);
 
-    cout << actual_cell->cubic.toString() << endl;
-
+    Bishop* bishopWhite = new Bishop('B');
+    actual_cell->setPiece(bishopWhite);
     cout << grid->toString() << endl;
 
 }
@@ -43,7 +42,9 @@ Grid* init_grid()
 {
     //thats a mess of a function lol
     int i, j, f, cells = 91;
+
     vector<vector<Cell>> gridVector;
+    Nopiece* np = new Nopiece();
     
     f = 0;
     for(j=-5; j<=0; ++j)
@@ -53,13 +54,13 @@ Grid* init_grid()
         if(j%2!=0){
             for(i=-2-f; i<=0; ++i){
                 Coord k(j, 2*i-1);
-                Cell c(j, 2*i-1, k);
+                Cell c(j, 2*i-1, k, np);
                 row.push_back(c);
             }
 
             for(i=0; i<=2+f; ++i){
                 Coord k(j, 2*i+1);
-                Cell c(j, 2*i+1, k);
+                Cell c(j, 2*i+1, k, np);
                 row.push_back(c);
             }
         }
@@ -67,13 +68,13 @@ Grid* init_grid()
         {
             for(i=-2-f; i<=0; ++i){
                 Coord k(j, 2*i);
-                Cell c(j, 2*i, k);
+                Cell c(j, 2*i, k, np);
                 row.push_back(c);
             }
 
             for(i=1; i<=2+f; ++i){
                 Coord k(j, 2*i);
-                Cell c(j, 2*i, k);
+                Cell c(j, 2*i, k, np);
                 row.push_back(c);
             }
         }
@@ -95,14 +96,14 @@ Grid* init_grid()
             for(i=-2-f; i<=0; ++i)
             {   
                 Coord k(j, 2*i);
-                Cell c(j, 2*i, k);
+                Cell c(j, 2*i, k, np);
                 row.push_back(c);
             }
 
             for(i=1; i<=2+f; ++i)
             {   
                 Coord k(j, 2*i);
-                Cell c(j, 2*i, k);
+                Cell c(j, 2*i, k, np);
                 row.push_back(c);
             }
         }
@@ -111,14 +112,14 @@ Grid* init_grid()
             for(i=-2-f; i<=0; ++i)
             {   
                 Coord k(j, 2*i-1);
-                Cell c(j, 2*i-1, k);
+                Cell c(j, 2*i-1, k, np);
                 row.push_back(c);
             }
 
             for(i=0; i<=2+f; ++i)
             {   
                 Coord k(j, 2*i+1);
-                Cell c(j, 2*i+1, k);
+                Cell c(j, 2*i+1, k, np);
                 row.push_back(c);
             }
         }
