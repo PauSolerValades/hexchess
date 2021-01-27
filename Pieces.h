@@ -9,12 +9,14 @@ class Piece{
     public:
         virtual ~Piece();
         virtual vector<Coord*> possible_movements(Coord* coord) = 0;
-        vector<Coord*> get_diagonals(Coord* coord);
         string toString();
         char getType();
 
     protected:
         char type;
+        char piece;
+        vector<Coord*> get_neighbours(Coord* coord);
+        vector<Coord*> get_diagonals(Coord* coord);
 };
 
 class Nopiece: public Piece{
@@ -28,7 +30,7 @@ class Nopiece: public Piece{
 class Knight: public Piece{
     public:
         Knight();
-        Knight(char type);
+        Knight(char piece, char type);
         
     private:
         vector<Coord*> possible_movements(Coord* coord);
@@ -37,14 +39,14 @@ class Knight: public Piece{
 class Bishop: public Piece{
     public:
         Bishop();
-        Bishop(char type);
+        Bishop(char piece, char type);
         vector<Coord*> possible_movements(Coord* Coord);
 };
 
 class PawnW: public Piece{
     public:
         PawnW();
-        PawnW(char type);
+        PawnW(char piece, char type);
         vector<Coord*> possible_movements(Coord* Coord);
 
 };
@@ -52,7 +54,15 @@ class PawnW: public Piece{
 class PawnB: public Piece{
     public:
         PawnB();
-        PawnB(char type);
+        PawnB(char piece, char type);
+        vector<Coord*> possible_movements(Coord* Coord);
+
+};
+
+class King: public Piece{
+    public:
+        King();
+        King(char piece, char type);
         vector<Coord*> possible_movements(Coord* Coord);
 
 };

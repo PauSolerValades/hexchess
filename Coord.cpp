@@ -5,9 +5,8 @@ using namespace std;
 
 Coord::Coord() = default;
 Coord::Coord(int x, int y){
-    int a, b, c;
-    this->x = (x - y)/2;
-    this->z = y;
+    this->x = (y - x)/2;
+    this->z = x;
     this->y = -this->x-this->z;
 }
 Coord::Coord(int x, int y, int z){

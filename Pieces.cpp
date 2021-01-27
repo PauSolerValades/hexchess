@@ -13,29 +13,56 @@ string Piece::toString(){
 char Piece::getType(){
     return this->type;
 }
-vector<Coord*> Piece::get_diagonals(Coord* coord){
+vector<Coord*> Piece::get_neighbours(Coord* coord){
     
-    int i;
-    vector<Coord*> result, real_result;
+    int i,j;
+    vector<Coord*> result;
 
-    Coord* c1 = new Coord(coord->x+2, coord->y-1, coord->z-1);
-    Coord* c2 = new Coord(coord->x-2, coord->y+1, coord->z+1);
-    Coord* c3 = new Coord(coord->x+1, coord->y-2, coord->z+1);
-    Coord* c4 = new Coord(coord->x-1, coord->y+2, coord->z-1);
-    Coord* c5 = new Coord(coord->x+1, coord->y+1, coord->z-2);
-    Coord* c6 = new Coord(coord->x-1, coord->y-1, coord->z+2);
-    
-    result.push_back(c1);
-    result.push_back(c2);
-    result.push_back(c3);
-    result.push_back(c4);
-    result.push_back(c5);
-    result.push_back(c6);
-
-    for(i=0; i<result.size(); ++i){
-        if(abs(result[i]->x)>=5 || abs(result[i]->y)>=5 || abs(result[i]->z)>=5){
-            real_result.push_back(result[i]);
+    //using axial coordinates to iterate
+    for(i=-1;i<=1;++i){
+        for(j=-1; j<=1; ++j){
+            if(i!=j && abs(coord->x+i)<=5 && abs(coord->y+j)<=5){
+                Coord* c = new Coord(coord->x+i, coord->y+j,-coord->x-coord->y);
+                result.push_back(c);
+            }
         }
+    }
+
+    return result;
+}
+vector<Coord*> Piece::get_diagonals(Coord* coord){
+
+    vector<Coord*> result;
+    
+    //i wish i coud have found a more elegant way
+    if(abs(coord->x+2)<=5 && abs(coord->y-1)<=5 && abs(coord->z-1)<=5){
+        Coord* c1 = new Coord(coord->x+2, coord->y-1, coord->z-1);
+        result.push_back(c1);
+    }
+
+    if(abs(coord->x-2)<=5 && abs(coord->y+1)<=5 && abs(coord->z+1)<=5){
+        Coord* c2 = new Coord(coord->x-2, coord->y+1, coord->z+1);
+        result.push_back(c2);
+    }
+
+    if(abs(coord->x+1)<=5 && abs(coord->y-2)<=5 && abs(coord->z+1)<=5){
+        Coord* c3 = new Coord(coord->x+1, coord->y-2, coord->z+1);
+        result.push_back(c3);
+    }
+
+    if(abs(coord->x-1)<=5 && abs(coord->y+2)<=5 && abs(coord->z-1)<=5){
+        Coord* c4 = new Coord(coord->x-1, coord->y+2, coord->z-1);
+        result.push_back(c4);
+    }
+
+    if(abs(coord->x+1)<=5 && abs(coord->y+1)<=5 && abs(coord->z-2)<=5){
+        Coord* c5 = new Coord(coord->x+1, coord->y+1, coord->z-2);
+        result.push_back(c5);
+    }
+
+    if(abs(coord->x-1)<=5 && abs(coord->y-1)<=5 && abs(coord->z+2)<=5){
+        Coord* c6 = new Coord(coord->x-1, coord->y-1, coord->z+2);
+        result.push_back(c6);
     }
 
     return result;
@@ -50,7 +77,8 @@ vector<Coord*> Nopiece::possible_movements(Coord* coord){
 }
 
 Knight::Knight() = default;
-Knight::Knight(char type){
+Knight::Knight(char piece, char type){
+    this->piece=piece;
     this->type = type;
 }
 vector<Coord*> Knight::possible_movements(Coord* coord){
@@ -61,7 +89,8 @@ vector<Coord*> Knight::possible_movements(Coord* coord){
 }
 
 Bishop::Bishop() = default;
-Bishop::Bishop(char type){
+Bishop::Bishop(char piece, char type){
+    this->piece=piece;
     this->type = type;
 }
 vector<Coord*> Bishop::possible_movements(Coord* coord){
@@ -107,5 +136,23 @@ vector<Coord*> Bishop::possible_movements(Coord* coord){
     }
 
     return results;    
+}
+
+King::King() = default;
+King::King(char piece, char team){
+    this->piece=piece;
+    this->type=team;
+}
+vector<Coord*> King::possible_movements(Coord* coord){
+    vector<Coord*> result, merge1, merge2;
+
+    merge1 = this->get_neighbours(coord);
+    merge2 = this->get_diagonals(coord);
+
+    result.resize(merge1.size() + merge2.size());
+    std::move(merge1.begin(), merge1.end(), result.begin());
+    std::move(merge2.begin(), merge2.end(), result.begin()+merge1.size());
+
+    return result;
 }
 

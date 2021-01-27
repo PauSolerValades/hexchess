@@ -33,11 +33,12 @@ int main()
     grid = init_grid();
     actual_cell = grid->acces_cell(2,4);
 
-    Bishop* bishopWhite = new Bishop('B');
-    Coord* coord = new Coord(0,-5,5);
+    Bishop* bishopWhite = new Bishop('B','B');
+    King* kingWhite = new King('K','B');
+    Coord* coord = new Coord(0,0,0);
     
     results = bishopWhite->possible_movements(coord);
-    diagonals = bishopWhite->get_diagonals(coord);
+    diagonals = kingWhite->possible_movements(coord);
     actual_cell->setPiece(bishopWhite);
     cout << grid->toString() << endl;
 
