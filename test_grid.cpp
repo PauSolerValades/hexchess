@@ -33,12 +33,20 @@ int main()
     grid = init_grid();
     actual_cell = grid->acces_cell(2,4);
 
-    Bishop* bishopWhite = new Bishop('B','B');
-    King* kingWhite = new King('K','B');
-    Coord* coord = new Coord(0,0,0);
+    Bishop* bishopWhite = new Bishop('B','W');
+    King* kingWhite = new King('K','W');
+    Tower* towerWhite = new Tower('T','W');
+    Queen* queenWhite = new Queen('Q','W');
+    PawnB* pawnBlack = new PawnB('P');
+    Knight* knightWhite = new Knight('H','W');
+    Coord* coord = new Coord(0,-5,5);
     
     results = bishopWhite->possible_movements(coord);
     diagonals = kingWhite->possible_movements(coord);
+    results = towerWhite->possible_movements(coord);
+    results = queenWhite->possible_movements(coord);
+    results = pawnBlack->possible_movements(coord);
+    results = knightWhite->possible_movements(coord);
     actual_cell->setPiece(bishopWhite);
     cout << grid->toString() << endl;
 
@@ -46,12 +54,12 @@ int main()
         cout << results[i]->toString() << endl;
     }
     cout << results.size() << endl;
-
+    /*
     for(i=0; i<diagonals.size(); ++i){
         cout << diagonals[i]->toString() << endl;
     }
     cout << diagonals.size() << endl;
-
+    */
 }
 
 Grid* init_grid()

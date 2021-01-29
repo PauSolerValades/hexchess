@@ -31,8 +31,6 @@ class Knight: public Piece{
     public:
         Knight();
         Knight(char piece, char type);
-        
-    private:
         vector<Coord*> possible_movements(Coord* coord);
 };
 
@@ -46,7 +44,7 @@ class Bishop: public Piece{
 class PawnW: public Piece{
     public:
         PawnW();
-        PawnW(char piece, char type);
+        PawnW(char piece);
         vector<Coord*> possible_movements(Coord* Coord);
 
 };
@@ -54,7 +52,7 @@ class PawnW: public Piece{
 class PawnB: public Piece{
     public:
         PawnB();
-        PawnB(char piece, char type);
+        PawnB(char piece);
         vector<Coord*> possible_movements(Coord* Coord);
 
 };
@@ -65,5 +63,20 @@ class King: public Piece{
         King(char piece, char type);
         vector<Coord*> possible_movements(Coord* Coord);
 
+};
+
+class Tower: public Piece{
+    public:
+        Tower();
+        Tower(char piece, char type);
+        vector<Coord*> possible_movements(Coord* Coord);
+        
+};
+
+class Queen: public Piece{
+    public:
+        Queen();
+        Queen(char piece, char type);
+        vector<Coord*> possible_movements(Coord* Coord);
 };
 #endif
