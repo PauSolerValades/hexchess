@@ -5,11 +5,13 @@
 #include "Coord.h"
 
 Piece::~Piece() = default;
-string Piece::toString(){ 
+string Piece::toString(){
     string a = "";
     a += type;
-    return a; 
+    a += piece;
+    return a;
 }
+
 char Piece::getType(){
     return this->type;
 }
